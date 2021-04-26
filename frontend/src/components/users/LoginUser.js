@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUserAction } from '../../redux/actions/users/usersActions'
+import ErrorMessage from '../ErrorMessage'
 
-const Login = () => {
+const Login = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,13 +19,16 @@ const Login = () => {
     dispatch(loginUserAction(email, password))
   }
 
+  useEffect(() => {
+    if (userInfo) history.push('/profile')
+  }, [userInfo])
+
   return (
     <div className='row container-height'>
       <div className='col-lg-6 col-md-6 m-auto'>
         <div className='container'>
           {loading && <h1>Loading</h1>}
-          {console.log(state)}
-          {/*error && <p>{error}</p>*/}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <form onSubmit={loginUserSubmitHandler}>
             <fieldset>
               <div className='form-group'>

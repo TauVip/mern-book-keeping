@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
+  USER_LOGOUT_SUCCESS,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS
@@ -47,7 +48,7 @@ const loginUserAction = (email, password) => async dispatch => {
       config
     )
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: USER_REGISTER_SUCCESS,
       payload: data
     })
 
@@ -60,4 +61,11 @@ const loginUserAction = (email, password) => async dispatch => {
   }
 }
 
-export { registerUserAction, loginUserAction }
+const logoutUserAction = () => async dispatch => {
+  try {
+    localStorage.removeItem('userAuthData')
+    dispatch({ type: USER_LOGOUT_SUCCESS })
+  } catch (error) {}
+}
+
+export { registerUserAction, loginUserAction, logoutUserAction }
