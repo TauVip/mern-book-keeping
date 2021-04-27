@@ -17,4 +17,4 @@ app.use(error.errorMiddlewareHandler)
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server is up and running ${PORT}`))
 
-// MERN Stack Book keeping App: #33 Logout user using redux | 3:16
+// MERN Stack Book keeping App: #34 user Profile controller | 2:31
